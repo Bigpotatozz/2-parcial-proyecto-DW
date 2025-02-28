@@ -16,7 +16,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.contrib import admin
+from django.urls import include, path
+from django.conf import settings
+from django.conf.urls.static import static
+import os
+from . import views
+from proyecto2.views import registro
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('cuentas/registro', views.registro, name='registro')
 ]

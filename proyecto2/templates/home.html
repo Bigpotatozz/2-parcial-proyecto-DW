@@ -1,0 +1,11 @@
+
+
+{% if user.is_authenticated%}
+    <h1>PAGINA DE INICIO</h1>  
+    <button type= "submit"> logout </button>
+
+    {%else%}
+    <h1>NO ESTAS AUTENTICADO</h1>
+   
+    
+{% endif %}

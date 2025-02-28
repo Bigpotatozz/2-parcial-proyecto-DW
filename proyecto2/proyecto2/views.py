@@ -17,3 +17,6 @@ def registro(request):
     else:
         form = RegistroForm()
     return render(request,"registration/registro.html",{"form":form})
+
+class Home_page_view(TemplateView):
+    template_name = 'home.html'

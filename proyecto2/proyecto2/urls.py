@@ -22,9 +22,13 @@ from django.conf import settings
 from django.conf.urls.static import static
 import os
 from . import views
-from proyecto2.views import registro
+from proyecto2.views import registro, Home_page_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('cuentas/registro', views.registro, name='registro')
+    path('cuentas/registro', views.registro, name='registro'),
+    path('login/', include("django.contrib.auth.urls")),
+    path('home', Home_page_view.as_view(), name = "home")
+    
+
 ]

@@ -27,15 +27,21 @@
 
               {% if user.is_authenticated%}
           
+              {% if perms.productosApp.comprar_productos %}
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'listaCompras' %}">Historial de compras</a>
+              </li>
+              {% endif %}
+
               <form id = "logout-form" method = "post" action = "{% url 'logout' %}">  
                   {%csrf_token%}
-                  <button type= "submit"> logout </button>
+                  <button type= "submit" > logout </button>
               </form>
-          
-          
+                   
+              
               {%else%}
-              <a href="{% url 'login' %}">Iniciar sesion</a>
-              <a href="{% url 'registro' %}">Registrarse</a>
+              <a class = "nav-link" href="{% url 'login' %}">Iniciar sesion</a>
+              <a class = "nav-link" href="{% url 'registro' %}">Registrarse</a>
           
           
               {% endif %}

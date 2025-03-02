@@ -6,6 +6,7 @@ from . import forms
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from productosApp.models import Producto
+from comprasApp.models import Compra
 
 # Create your views here.
 class Vista_comprar(PermissionRequiredMixin, FormView):
@@ -17,7 +18,7 @@ class Vista_comprar(PermissionRequiredMixin, FormView):
     template_name = "registrarCompra.html"
  
     form_class = forms.Form_registrar_compra
-    success_url = reverse_lazy('listaProductos')
+    success_url = reverse_lazy('listaCompras')
         
 
     
@@ -39,3 +40,13 @@ class Vista_comprar(PermissionRequiredMixin, FormView):
     def form_valid(self, form):
         form.save(self.kwargs.get('id'), user = self.request.user)
         return super().form_valid(form)
+    
+class Vista_lista_compras(TemplateView):
+    template_name = 'listaCompras.html'
+    def get_context_data(self):
+        compras = Compra.objects.filter(cliente = self.request.user.id)
+
+        return {
+            'compras': compras
+        }
+        

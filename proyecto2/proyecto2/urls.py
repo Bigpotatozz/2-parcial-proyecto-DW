@@ -27,8 +27,11 @@ from proyecto2.views import registro, Home_page_view
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('cuentas/registro', views.registro, name='registro'),
-    path('login/', include("django.contrib.auth.urls")),
-    path('home', Home_page_view.as_view(), name = "home")
+    path('cuenta/', include("django.contrib.auth.urls")),
+    path('home', Home_page_view.as_view(), name = "home"),
+    path('productos/', include('productosApp.urls'), name = "productos")
     
 
 ]
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+

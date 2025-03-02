@@ -1,0 +1,29 @@
+
+{%extends "base.html"%}
+{% load static %}
+    {%block content%}
+    <div style= "margin-top: 50px;" class = "p-5">
+        <h1 class="text-center">Lista de productos</h1>
+        <a href= "crearProducto" class="btn btn-success" style = "margin-bottom: 50px">Agregar producto</a>
+          
+               
+                <div class= "row -1">
+                    {%for producto in productos%}
+                    <div class="card col-4" style="width: 18rem;">
+                        <img src="{% if producto.imagen%}
+                                {{producto.imagen.url}}
+                                {% endif %}" class="card-img-top" alt="..." style= "height: 300px;">
+                        <div class="card-body">
+                          <h5 class="card-title">{{producto.nombre}}</h5>
+                          <p class="card-text">{{producto.precio}}</p>
+                          <a href="#" class="btn btn-primary">Comprar</a>
+                          <a href="#" class="btn btn-primary">Editar</a>
+                        </div>
+                      </div>
+                      {%endfor%}
+                </div>
+               
+              
+    </div>
+  
+    {%endblock content%}

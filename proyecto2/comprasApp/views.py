@@ -41,7 +41,8 @@ class Vista_comprar(PermissionRequiredMixin, FormView):
         form.save(self.kwargs.get('id'), user = self.request.user)
         return super().form_valid(form)
     
-class Vista_lista_compras(TemplateView):
+class Vista_lista_compras(PermissionRequiredMixin, TemplateView):
+    permission_required = 'productosApp.comprar_productos'
     template_name = 'listaCompras.html'
     def get_context_data(self):
         compras = Compra.objects.filter(cliente = self.request.user.id)

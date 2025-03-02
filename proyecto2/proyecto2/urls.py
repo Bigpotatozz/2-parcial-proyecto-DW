@@ -29,7 +29,8 @@ urlpatterns = [
     path('cuentas/registro', views.registro, name='registro'),
     path('cuenta/', include("django.contrib.auth.urls")),
     path('home', Home_page_view.as_view(), name = "home"),
-    path('productos/', include('productosApp.urls'), name = "productos")
+    path('productos/', include('productosApp.urls'), name = "productos"),
+    path('comprar/', include('comprasApp.urls'), name = "comprar")
     
 
 ]

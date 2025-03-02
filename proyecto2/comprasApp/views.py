@@ -1,3 +1,35 @@
 from django.shortcuts import render
+from django.views.generic.base import TemplateView
+from django.views.generic import FormView
+from django.urls import reverse_lazy
+from . import forms
+from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib.auth.mixins import PermissionRequiredMixin
+from productosApp.models import Producto
 
 # Create your views here.
+class Vista_comprar(FormView):
+    template_name = "registrarCompra.html"
+    form_class = forms.Form_registrar_compra
+    success_url = reverse_lazy('listaProductos')
+        
+
+    
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        id = self.kwargs.get('id')
+        producto = get_object_or_404(Producto, id = id)
+        kwargs['instance'] = producto
+        return kwargs
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        id = self.kwargs.get('id')
+        producto = get_object_or_404(Producto, id=id)
+        context['producto'] = producto
+        return context
+    
+
+    def form_valid(self, form):
+        form.save(self.kwargs.get('id'), user = self.request.user)
+        return super().form_valid(form)

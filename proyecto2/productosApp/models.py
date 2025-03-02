@@ -8,5 +8,9 @@ class Producto(models.Model):
     precio = models.FloatField()
     imagen = models.ImageField(upload_to='imagenes/', null= True, blank= True)
     
+    
+    class Meta:
+        permissions = [("comprar_productos", "puede comprar productos")]
+    
     def __str__(self):
         return f"{self.id}--{self.nombre}--{self.precio}--{self.imagen}"

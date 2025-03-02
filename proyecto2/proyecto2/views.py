@@ -9,8 +9,8 @@ def registro(request):
         form = RegistroForm(request.POST)
         if form.is_valid():
             user = form.save()
-           # grupo, created = Group.objects.get_or_create(name='cliente')
-           # user.groups.add(grupo)
+            grupo, created = Group.objects.get_or_create(name='cliente')
+            user.groups.add(grupo)
             user.save()
             login(request, user)
             return redirect('home')

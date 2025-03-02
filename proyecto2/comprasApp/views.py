@@ -8,8 +8,14 @@ from django.contrib.auth.mixins import PermissionRequiredMixin
 from productosApp.models import Producto
 
 # Create your views here.
-class Vista_comprar(FormView):
+class Vista_comprar(PermissionRequiredMixin, FormView):
+    permission_required = 'productosApp.comprar_productos'
+    
+    def handle_no_permission(self):
+        return redirect('listaProductos')
+    
     template_name = "registrarCompra.html"
+ 
     form_class = forms.Form_registrar_compra
     success_url = reverse_lazy('listaProductos')
         

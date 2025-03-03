@@ -43,6 +43,10 @@ class Vista_comprar(PermissionRequiredMixin, FormView):
     
 class Vista_lista_compras(PermissionRequiredMixin, TemplateView):
     permission_required = 'productosApp.comprar_productos'
+    
+    def handle_no_permission(self):
+        return redirect('listaProductos')
+    
     template_name = 'listaCompras.html'
     def get_context_data(self):
         compras = Compra.objects.filter(cliente = self.request.user.id)
@@ -51,3 +55,18 @@ class Vista_lista_compras(PermissionRequiredMixin, TemplateView):
             'compras': compras
         }
         
+class Vista_lista_ventas(PermissionRequiredMixin, TemplateView):
+    
+    permission_required = "productosApp.administrador" 
+
+    def handle_no_permission(self):
+        return redirect('listaProductos')
+    
+    template_name = "listaVentas.html"
+    
+    def get_context_data(self):
+        ventas = Compra.objects.all()
+        
+        return {
+            'ventas': ventas
+        }

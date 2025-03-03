@@ -22,7 +22,7 @@
                 <a class="nav-link" href="{% url 'home'%}">Home</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{% url 'listaProductos' %}">productos</a>
+                <a class="nav-link" href="{% url 'listaProductos' %}">Tienda</a>
               </li>
 
               {% if user.is_authenticated%}
@@ -31,6 +31,18 @@
               <li class="nav-item">
                 <a class="nav-link" href="{% url 'listaCompras' %}">Historial de compras</a>
               </li>
+              {% endif %}
+
+              {% if perms.productosApp.administrador %}
+
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'listadoProductos' %}">Administracion de productos</a>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'listaVentas' %}">Listado de ventas</a>
+              </li>
+              
               {% endif %}
 
               <form id = "logout-form" method = "post" action = "{% url 'logout' %}">  

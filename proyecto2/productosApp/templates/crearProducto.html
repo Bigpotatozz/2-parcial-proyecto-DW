@@ -1,29 +1,46 @@
-{%extends "base.html"%}
+{% extends "base.html" %}
 {% load static %}
-    {%block content%}
 
-    <div style= "margin-top: 200px;">
-        <h1 class="text-center">Registrar producto</h1>
+{% block content %}
+<div class="container min-vh-100 d-flex align-items-center justify-content-center">
+    <div class="card shadow-lg rounded-4 p-4" style="max-width: 500px; width: 100%;">
+        <h2 class="text-center mb-4">Registrar Producto</h2>
 
         <form method="post" enctype="multipart/form-data">
-            {%csrf_token%}
-           
-            <div>
-                <label for="nombre">Nombre del producto: </label>
-                {{form.nombre}}
-                <label for="precio">Precio: </label>
-                {{form.precio}}
-                <label for="imagen">Imagen: </label>
-                {{form.imagen}}
-
+            {% csrf_token %}
+            
+            <div class="mb-3">
+                <label class="form-label">Nombre del producto:</label>
+                {{ form.nombre }}
+                {% if form.nombre.errors %}
+                    <div class="alert alert-danger mt-2">
+                        {{ form.nombre.errors }}
+                    </div>
+                {% endif %}
             </div>
 
-            {%for error in field.errors%}
-                <p>{{error}}</p>
-            {%endfor%}
-            <button>Guardar</button>
+            <div class="mb-3">
+                <label class="form-label">Precio:</label>
+                {{ form.precio }}
+                {% if form.precio.errors %}
+                    <div class="alert alert-danger mt-2">
+                        {{ form.precio.errors }}
+                    </div>
+                {% endif %}
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Imagen:</label>
+                {{ form.imagen }}
+                {% if form.imagen.errors %}
+                    <div class="alert alert-danger mt-2">
+                        {{ form.imagen.errors }}
+                    </div>
+                {% endif %}
+            </div>
+
+            <button type="submit" class="btn btn-success btn-lg w-100">Guardar</button>
         </form>
     </div>
-      
- 
-    {%endblock content%}
+</div>
+{% endblock %}

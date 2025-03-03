@@ -1,0 +1,26 @@
+{%extends "base.html"%}
+{% load static %}
+    {%block content%}
+    <div style= "margin-top: 200px;">
+        <h1 class="text-center">Lista de ventas</h1>
+    
+        <table class= "table table-striped">
+            <thead>
+                <th>Compra</th>
+                <th>Producto</th>
+                <th>Cantidad</th>
+                <th>Total</th>
+            </thead>
+            <tbody>
+                {%for venta in ventas %}
+                    <tr>
+                        <td>{{venta.id}}</td>
+                        <td>{{venta.producto.nombre}}</td>
+                        <td>{{venta.cantidad}}</td>
+                        <td>{{venta.precio}}</td>
+                    </tr>
+                {%endfor%}
+        </table>
+    </div>
+  
+    {%endblock content%}

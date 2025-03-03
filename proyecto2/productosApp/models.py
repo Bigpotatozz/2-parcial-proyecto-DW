@@ -10,7 +10,7 @@ class Producto(models.Model):
     
     
     class Meta:
-        permissions = [("comprar_productos", "puede comprar productos")]
+        permissions = [("comprar_productos", "puede comprar productos"), ("administrador", "puede editar y agregar productos")]
     
     def __str__(self):
         return f"{self.id}--{self.nombre}--{self.precio}--{self.imagen}"
